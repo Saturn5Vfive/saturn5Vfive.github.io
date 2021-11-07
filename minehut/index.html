@@ -1,1 +1,139 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="dark.css" rel="stylesheet">
+    <title>Shadow</title>
+    <meta content="Shadow" property="og:title">
+    <meta content="#002d2d" data-react-helmet="true" name="theme-color">
+</head>
+
+<body>
+    <main>
+        <div class = "header">
+            <h1>Minehut</h1>
+        </div>
+        <div class="transform">
+            <form>
+                <input type="text" id="field" placeholder="Input">
+            </form>
+            <button type="button" onclick='fireForceFind()'>Forcefind</button>
+            <button type="button" onclick='pllistserver()'>Plugins</button>
+            <button type="button" onclick='firePlrList()'>Player List</button>
+        </div>
+        <h3 id="out"></h3>
+    </main>
+    <a href="https://shadow.tk/"><button class="btn"><i class="fa fa-home"></i></button></a>
+</body>
+
+<script>
+    async function fireForceFind() {
+        let val = document.getElementById("field").value
+        const httprequest = new XMLHttpRequest();
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Getting servers content]";
+        await sleep(50);
+        httprequest.open("GET", "https://api.minehut.com/servers", false);
+        httprequest.send(null);
+        let slist = httprequest.responseText;
+        let found = false;
+        let sjson = JSON.parse(slist);
+        let serverlist = sjson.servers;
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Resolving Player UUID]";
+        await sleep(50);
+        const httprequest2 = new XMLHttpRequest();
+        httprequest2.open("GET", "https://api.ashcon.app/mojang/v2/user/" + val, false);
+        httprequest2.send(null);
+        let uuid = JSON.parse(httprequest2.responseText).uuid;
+        uuid = uuid.replace("-", "");
+        console.warn(uuid);
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Resolving Player From Server]";
+        await sleep(50);
+        for(var server of serverlist){
+            let players = server["playerData"]["players"];
+            for(var player of players){
+                let strippedplayer = player.replace("-", "");
+                console.warn(strippedplayer);
+                if(strippedplayer == uuid){
+                    document.getElementById("out").innerHTML = "Operation Complete!<br> " + val + " was found on <br>" + server["name"];
+                    found = true;
+                }
+            }
+        }
+        if(!found){
+            document.getElementById("out").innerHTML = "Operation Complete!<br> " + val + " was not found";
+        }
+    }
+    async function pllistserver() {
+        let val = document.getElementById("field").value
+        const httprequest = new XMLHttpRequest();
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Getting servers content]";
+        await sleep(50);
+        httprequest.open("GET", "https://api.minehut.com/server/" + val + "?byName=true", false);
+        httprequest.send(null);
+        const pluginsrequest = new XMLHttpRequest();
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Getting possible plugins]";
+        await sleep(50);
+        pluginsrequest.open("GET", "https://merchandise-service-prod.superleague.com/merchandise/v1/merchandise/products/?populateVersions=true", false);
+        pluginsrequest.send(null);
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Resolving Plugins]";
+        await sleep(150);
+        const splugs = JSON.parse(httprequest.responseText)["server"]["installed_content"];
+        const allplugins = JSON.parse(pluginsrequest.responseText)["products"];
+        let pluglist = "Plugins:<br>PlayerServer<br>";
+        for(var splugin of splugs){
+            for(var plugin of allplugins){
+                if(plugin["sku"] == splugin["content_id"]){
+                    pluglist += plugin["title"] + "<br>";
+                }
+            }
+        }
+        document.getElementById("out").innerHTML = pluglist;
+    }
+    async function firePlrList() {
+        let val = document.getElementById("field").value
+        const serversrequest = new XMLHttpRequest();
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Getting servers content]";
+        await sleep(50);
+        serversrequest.open("GET", "https://api.minehut.com/servers/", false);
+        serversrequest.send(null);
+        const servers = JSON.parse(serversrequest.responseText)["servers"];
+        let found = false;
+        let playerlist = "Players:<br>";
+        await sleep(100);
+        document.getElementById("out").innerHTML = "Working <br>[Resolving Players]";
+        await sleep(50);
+        for(var server of servers){
+            if(server["name"].toLowerCase() == val.toLowerCase()){
+                found = true;
+                const serverplayers = server["playerData"]["players"]
+                for(var player of serverplayers){
+                    const playerlookup = new XMLHttpRequest();
+                    playerlookup.open("GET", "https://api.ashcon.app/mojang/v2/user/" + player, false);
+                    playerlookup.send(null);
+                    const name = JSON.parse(playerlookup.responseText)["name"];
+                    playerlist += name + "<br>";
+                }
+            }
+        }
+        if(!found){
+            document.getElementById("out").innerHTML = "That server was not found";
+        }
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+</script>
+
+</html>
