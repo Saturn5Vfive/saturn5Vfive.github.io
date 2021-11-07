@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../hado/dark.css" rel="stylesheet">
+    <title>Shadow</title>
+    <meta content="Shadow" property="og:title">
+    <meta content="#002d2d" data-react-helmet="true" name="theme-color">
+</head>
+
+<body>
+    <main>
+        <div class = "header">
+            <h1>Webhook Sender</h1>
+        </div>
+        <div class="transform">
+            <form>
+                <input type="text", id="uri", placeholder="Webhook URL">
+            </form>
+            <form>
+                <input type="text", id="username", placeholder="Webhook Name">
+            </form>
+            <form>
+                <input type="text", id="content", placeholder="Webhook Content">
+            </form>
+    
+            <button type="button", onclick='fireServer()'>Fire Webhook</button>
+        </div>
+        <div class = "links">
+            <a href="https://shadow.tk/"><img src="sources/shadow.png"></a>
+        </div>
+    </main>
+</body>
+
+<script>
+    function fireServer() {
+      var uritarded = document.getElementById("uri").value
+      var usernam = document.getElementById("username").value
+      var conten = document.getElementById("content").value
+      console.warn(uritarded);
+      console.warn(usernam);
+      console.warn(content);
+      const httprequest = new XMLHttpRequest();
+      httprequest.open("POST", uritarded);
+      httprequest.setRequestHeader('Content-type', 'application/json');
+      const params = {
+        username: usernam,
+        avatar_url: "",
+        content: conten
+      }
+      httprequest.send(JSON.stringify(params));
+    }
+</script>
+
+</html>
