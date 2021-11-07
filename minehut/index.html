@@ -3,14 +3,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <head>
-    <meta content="Shadow" property="og:title" />
-    <meta content="Screw with minehut a bit" property="og:description" />
-    <meta content="https://shadow.tk/" property="og:url" />
-    <meta content="https://shadow.tk/sources/shadow.png" property="og:image" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../hado/dark.css" rel="stylesheet">
+    <link href="dark.css" rel="stylesheet">
     <title>Shadow</title>
     <meta content="Shadow" property="og:title">
     <meta content="#002d2d" data-react-helmet="true" name="theme-color">
@@ -65,13 +61,13 @@
                 let strippedplayer = player.replace("-", "");
                 console.warn(strippedplayer);
                 if(strippedplayer == uuid){
-                    document.getElementById("out").innerHTML = "Operation Complete!<br> " + val + " was found on <br>" + server["name"];
+                    document.getElementById("out").innerHTML = val + " was found on <br>" + server["name"];
                     found = true;
                 }
             }
         }
         if(!found){
-            document.getElementById("out").innerHTML = "Operation Complete!<br> " + val + " was not found";
+            document.getElementById("out").innerHTML = val + " was not found";
         }
     }
     async function pllistserver() {
@@ -125,13 +121,15 @@
                     const playerlookup = new XMLHttpRequest();
                     playerlookup.open("GET", "https://api.ashcon.app/mojang/v2/user/" + player, false);
                     playerlookup.send(null);
-                    const name = JSON.parse(playerlookup.responseText)["name"];
+                    const name = JSON.parse(playerlookup.responseText)["username"];
                     playerlist += name + "<br>";
                 }
             }
         }
         if(!found){
             document.getElementById("out").innerHTML = "That server was not found";
+        }else{
+            document.getElementById("out").innerHTML = playerlist;
         }
     }
 
