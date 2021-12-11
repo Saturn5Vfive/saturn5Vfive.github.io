@@ -15,11 +15,11 @@
 </body>
 <script>
     let oro = window.location.href;
-    let arr = oro.split("loc");
+    let arr = oro.split("?data");
     if(arr.length == 2){
         let target = arr[1].substring(1);
         window.location = atob(target);
     }else{
-        document.getElementById("test").innerHTML = "Wrong Syntax provided, use ?loc={base64 encoded link}";
+        document.getElementById("test").innerHTML = "Wrong Syntax provided, use ?data={base64 encoded link}";
     }
 </script>
