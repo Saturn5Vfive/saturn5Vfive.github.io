@@ -40,13 +40,13 @@
                 for(var player of players){
                     let strippedplayer = player.replace("-", "");
                     if(strippedplayer == uuid){
-                        document.getElementById("test").innerHTML = "{\"player\":\"" + val + "\",\"server\":\"" + server["name"] + "\"}";
+                        document.getElementById("test").innerHTML = "Player: "val + "<br>Is Online: " + server["name"] + "";
                         found = true;
                     }
                 }
             }
             if(!found){
-                document.getElementById("test").innerHTML = "{\"player\":\"" + val + "\",\"server\":\"NONE\"}";
+                document.getElementById("test").innerHTML = "Player: " + val + "<br>Is Online: NONE";
             }   
         }else{
             document.getElementById("test").innerHTML = "Wrong Syntax provided, use ?data={player's name}";
