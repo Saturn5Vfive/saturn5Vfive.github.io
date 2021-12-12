@@ -17,11 +17,10 @@
 </body>
 <script>
     window.onload = function(){
-        let oro = window.location.href;
-        let arr = oro.split("?data");
-        if(arr.length == 2){
-            let target = arr[1].substring(1);
-            let val = target;
+        const query = location.hash
+        const status = document.getElementById("test")
+        if(query && query !== "#"){
+            let val = query.slice(1);
             const httprequest = new XMLHttpRequest();
             httprequest.open("GET", "https://api.minehut.com/servers", false);
             httprequest.send(null);
@@ -46,10 +45,10 @@
                 }
             }
             if(!found){
-                document.getElementById("test").innerHTML = "Player: " + val + "<br>Is Online: NONE";
+                status.innerText = "Player: " + val + "<br>Is Online: NONE";
             }   
         }else{
-            document.getElementById("test").innerHTML = "Wrong Syntax provided, use ?data={player's name}";
+            status.innerText = "Required 'data' parameter missing (Player's Name)"
         }
     };
 </script>
