@@ -16,13 +16,11 @@
     </main>
 </body>
 <script>
-    let oro = window.location.href;
-    let arr = oro.split("?data");
-    if(arr.length == 2){
-        let target = arr[1].substring(1);
-        document.getElementById("test").innerHTML = btoa(target);
-    }else{
-        document.getElementById("test").innerHTML = "Wrong Syntax provided, use ?data={data to encode}";
+    const query = location.hash
+    const status = document.getElementById("test")
+    if (query && query !== "#") {
+        status.innerText = btoa(query.slice(1))
+    } else {
+        status.innerText = "Required 'data' parameter missing (Base64-encoded link)"
     }
-
 </script>
