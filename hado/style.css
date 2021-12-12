@@ -13,35 +13,18 @@ main {
     transform:translate(-50%,-50%);
     color: white;
     font-family: monospace;
-    max-width: 50%;
+    max-width: 100%;
 }
-.header {
-    text-align: center;
+.box-input {
+    background-color: #6b6b6b;
+    width: 75%;
+    padding: 20px;
+    border: 2px solid #00000000;
 }
-.desc {
-    text-align: center;
-}
-.links {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-}
-.media>* {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-img {
-    width: 40px;
-    border-radius: 50%;
-    transition: all 0.2s ease-in-out;
-}
-img:hover {
-    transform:scale(1.1);
-    transition: all 0.2s ease-in-out;
-}
-
-a:visited {
-    color: rgb(18, 123, 221);
+.btn {
+    width: 75%;
+    margin-top: 25px;
+    padding: 17px;
+    background-color: #6b6b6b;
+    border: 2px solid #00000000;
 }
