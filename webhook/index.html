@@ -15,7 +15,7 @@
         <div class = "header">
             <h1>Webhook Sender</h1>
         </div>
-        <div class="transform">
+        <div class="box-input">
             <form>
                 <input type="text", id="uri", placeholder="URL">
             </form>
@@ -29,21 +29,14 @@
                 <input type="text", id="avurl", placeholder="Avatar URL">
             </form>
 
+
+        </div>
+        <div class="btn">
             <button type="button", id="btn">Fire Webhook</button>
         </div>
     </main>
     <script src="../jquery.js"></script>
-    <script>
-    $(function(){
-        $('#btn').click(function(){
-            var link = $('#uri').val();
-            var username = $('#username').val();
-            var content = $('#content').val();
-            var avatar = $('#avurl').val();
-            $.post(link, {"content": content, "username": username, "avatar_url": avatar,});
-        });
-    });
-    </script>
+    <script src="hook.js"></script>
 </body>
 
 
