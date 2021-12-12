@@ -13,7 +13,7 @@ main {
     transform:translate(-50%,-50%);
     color: white;
     font-family: monospace;
-    max-width: 100%;
+    max-width: 50%;
 }
 .box-input {
     background-color: #6b6b6b;
@@ -27,4 +27,35 @@ main {
     padding: 17px;
     background-color: #6b6b6b;
     border: 2px solid #00000000;
+}
+
+.header {
+    text-align: center;
+}
+.desc {
+    text-align: center;
+}
+.links {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.media>* {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+img {
+    width: 40px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+}
+img:hover {
+    transform:scale(1.1);
+    transition: all 0.2s ease-in-out;
+}
+
+a:visited {
+    color: rgb(18, 123, 221);
 }
