@@ -43,15 +43,11 @@
     }
     async function postData(url, av, c, u) {
         var request = new XMLHttpRequest();
-	    request.open("POST", url);
-	    request.setRequestHeader('Content-type', 'application/json');
+	    request.open("POST", url, true);
 	    var msg = {
 	    	username: u,
 	    	avatar_url: av,
-	    	content: c,
-	    	embeds: [
-			
-	    	]
+	    	content: c
 	    }
 	
 	    request.send(JSON.stringify(msg));
