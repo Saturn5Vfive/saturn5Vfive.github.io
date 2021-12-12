@@ -39,7 +39,6 @@
                 let players = server["playerData"]["players"];
                 for(var player of players){
                     let strippedplayer = player.replace("-", "");
-                    console.warn(strippedplayer);
                     if(strippedplayer == uuid){
                         document.getElementById("test").innerHTML = "{\"player\":\"" + val + "\",\"server\":\"" + server["name"] + "\"}";
                         found = true;
