@@ -39,6 +39,6 @@
         var username = document.getElementById("username").value
         var content = document.getElementById("content").value
         var avatar = document.getElementById("avurl").value
-        $.post(link, {"content": content, "username": username, "avatar_url": avatar,});
+        post(link, {"content": content, "username": username, "avatar_url": avatar,});
     }
 </script>
