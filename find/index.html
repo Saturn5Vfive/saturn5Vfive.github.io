@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="hado/simple.css" rel="stylesheet">
+    <title>Shadow</title>
+</head>
+
+<body>
+    <main>
+        <p id="test"></p>
+    </main>
+</body>
+<script>
+    window.onload = function(){
+        let oro = window.location.href;
+        let arr = oro.split("?data");
+        if(arr.length == 2){
+            let target = arr[1].substring(1);
+            let val = target;
+            const httprequest = new XMLHttpRequest();
+            httprequest.open("GET", "https://api.minehut.com/servers", false);
+            httprequest.send(null);
+            let slist = httprequest.responseText;
+            let found = false;
+            let sjson = JSON.parse(slist);
+            let serverlist = sjson.servers;
+            const httprequest2 = new XMLHttpRequest();
+            httprequest2.open("GET", "https://api.ashcon.app/mojang/v2/user/" + val, false);
+            httprequest2.send(null);
+            let uuid = JSON.parse(httprequest2.responseText).uuid;
+            uuid = uuid.replace("-", "");
+            console.warn(uuid);
+            for(var server of serverlist){
+                let players = server["playerData"]["players"];
+                for(var player of players){
+                    let strippedplayer = player.replace("-", "");
+                    console.warn(strippedplayer);
+                    if(strippedplayer == uuid){
+                        document.getElementById("test").innerHTML = "{\"player\":\"" + val + "\",\"server\":\"" + server["name"] + "\"}";
+                        found = true;
+                    }
+                }
+            }
+            if(!found){
+                document.getElementById("test").innerHTML = "{\"player\":\"" + val + "\",\"server\":\"NONE\"}";
+            }   
+        }else{
+            document.getElementById("test").innerHTML = "Wrong Syntax provided, use ?data={player's name}";
+        }
+    };
+</script>
