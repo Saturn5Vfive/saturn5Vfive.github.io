@@ -13,11 +13,11 @@
 <body>
     <main>
         <div class = "header">
-            <h1>Webhook Executor</h1>
+            <h1>Webhook Sender</h1>
         </div>
-        <div class="box-input">
+        <div class="transform">
             <form>
-                <input type="text", id="whurl", placeholder="URL">
+                <input type="text", id="uri", placeholder="URL">
             </form>
             <form>
                 <input type="text", id="username", placeholder="Name">
@@ -29,12 +29,31 @@
                 <input type="text", id="avurl", placeholder="Avatar URL">
             </form>
 
-
-        </div>
-        <div class="btn">
-            <button type="button", id="btn", onclick="sendMessage()">Fire Webhook</button>
+            <button type="button", onclick='fireServer()'>Fire Webhook</button>
         </div>
     </main>
-    <script src="jquery.js"></script>
-    <script src="hook.js"></script>
 </body>
+<script>
+    function fireServer(){
+        var link = document.getElementById("uri").value
+        var username = document.getElementById("username").value
+        var content = document.getElementById("content").value
+        var avatar = document.getElementById("avurl").value
+        postData(link, avatar, content, username);
+    }
+    async function postData(url, av, c, u) {
+        var request = new XMLHttpRequest();
+	    request.open("POST", url);
+	    request.setRequestHeader('Content-type', 'application/json');
+	    var msg = {
+	    	username: u,
+	    	avatar_url: av,
+	    	content: c,
+	    	embeds: [
+			
+	    	]
+	    }
+	
+	    request.send(JSON.stringify(msg));
+    }
+</script>
