@@ -1,15 +1,14 @@
-$(function(){
-    $('#btn').click(function(){
-        var link = $('#link').val();
-        var username = $('#username').val();
-        var content = $('#content').val();
-        var avatar = $('#avatar').val();
-        if (link==null || link=="",content==null || content=="")
-        {
-            alert("Please Fill Out All The Fields");
-            return false;
-        }
-        $.post(link, {"content": content, "username": username, "avatar_url": avatar,});
+function sendMessage() {
+      const request = new XMLHttpRequest();
+      request.open("POST", document.getElementById("whurl").value);
 
-    });
-});
+      request.setRequestHeader('Content-type', 'application/json');
+
+      const params = {
+        username: "My Webhook Name",
+        avatar_url: "",
+        content: "The message to send"
+      }
+
+      request.send(JSON.stringify(params));
+}
