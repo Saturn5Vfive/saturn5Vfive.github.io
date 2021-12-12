@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../hado/shadow.png">
+    <link href="../hado/simple.css" rel="stylesheet">
+    <title>Shadow</title>
+</head>
+
+<body>
+    <main>
+        <p id="test"></p>
+    </main>
+</body>
+<script>
+    function reverseString(str) {
+      return str.split("").reverse().join("");
+    }
+    const query = location.hash
+    const status = document.getElementById("test")
+    if (query && query !== "#") {
+        let string = query.slice(1);
+        status.innerText = reverseString(string);
+    } else {
+        status.innerText = "Required 'data' parameter missing (Ascii Text)"
+    }
+</script>
