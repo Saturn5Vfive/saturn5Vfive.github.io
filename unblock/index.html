@@ -25,8 +25,9 @@
       const query = location.hash
       const status = document.getElementById("test")
       if (query && query !== "#") {
-          aWindow = window.open(query.slice(1), "_blank", 'menubar=yes, status=yes, toolbar=yes, resizable=yes, width=500, height=500, titlebar=yes, alwaysRaised=no');
-          aWindow.location.replace(query.slice(1));
+          let location = atob(query.slice(1));
+          aWindow = window.open(location, "_blank", 'menubar=yes, status=yes, toolbar=yes, resizable=yes, width=500, height=500, titlebar=yes, alwaysRaised=no');
+          aWindow.location.replace(location);
       } else {
           status.innerText = "Required 'data' parameter missing (Base64-Encoded Link)"
       }
