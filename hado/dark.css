@@ -25,7 +25,7 @@ main {
  text-align:center;  
 }
 
-#uri, #username, #content, #avurl {
+#whurl, #username, #content, #avurl {
     font-size: 20px;
     background-color: #8f8f8f;
     width: 50%;
@@ -34,7 +34,7 @@ main {
     border: 2px solid #00000000;
 }
 
-#button {
+#btn {
     width: 52%;
     font-size: 20px;
     margin-top: 15px;
