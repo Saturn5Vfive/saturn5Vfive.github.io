@@ -34,22 +34,28 @@
     </main>
 </body>
 <script>
-    function fireServer(){
+      async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  }); // parses JSON response into native JavaScript objects
+}
+
+     async function fireserver(){
         var link = document.getElementById("uri").value
         var username = document.getElementById("username").value
         var content = document.getElementById("content").value
         var avatar = document.getElementById("avurl").value
-        postData(link, avatar, content, username);
-    }
-    async function postData(url, av, c, u) {
-        var request = new XMLHttpRequest();
-	    request.open("POST", url, true);
-	    var msg = {
-	    	username: u,
-	    	avatar_url: av,
-	    	content: c
-	    }
-	
-	    request.send(JSON.stringify(msg));
-    }
+        postData('https://mh-moles.herokuapp.com/fire', {"url": link, "username": username, "content": content, "avatar_url": avatar})
+      }
 </script>
