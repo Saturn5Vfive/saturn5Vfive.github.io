@@ -12,7 +12,7 @@
 
 <body>
     <main>
-        <p id="test"></p>
+        <h1 id="test">Making Requests...</h1>
     </main>
 </body>
 <script>
@@ -39,7 +39,7 @@
                 for(var player of players){
                     let strippedplayer = player.replace("-", "");
                     if(strippedplayer == uuid){
-                        document.getElementById("test").innerHTML = "Player: "val + "<br>Is Online: " + server["name"] + "";
+                        document.getElementById("test").innerHTML = "Player: " + val + "<br>Is Online: " + server["name"] + "";
                         found = true;
                     }
                 }
