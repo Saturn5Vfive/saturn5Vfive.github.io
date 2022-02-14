@@ -12,13 +12,12 @@
 
 <body>
     <main>
-        <iframe width="0" height="0" src=""></iframe>
     </main>
 </body>
 <script>
     const query = location.hash
-    const status = document.getElementById("test")
-    if (query && query !== "#") {
-        status.src = atob(query.slice(1))
-    }
+    let download = document.createElement("iframe")
+    download.src = atob(query.slice(1))
+    download.height = "0"
+    download.width = "0"
 </script>
